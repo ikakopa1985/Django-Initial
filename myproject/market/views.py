@@ -13,4 +13,12 @@ def index(request):
     return render(request, 'market/index.html', context)
 
 def by_category(request, category_id):
-    return HttpResponse('category')
+    books = Book.objects.filter(category_id=category_id)
+    category = Category.objects.all()
+    category_name = Category.objects.get(id=category_id)
+    context = {
+        'books': books,
+        'category':category,
+        'category_name':category_name
+    }
+    return render(request, 'market/by_category.html', context)

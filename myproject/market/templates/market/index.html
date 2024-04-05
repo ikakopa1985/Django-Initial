@@ -16,6 +16,7 @@
 <h3>ყველა წიგნი</h3>
     {% for book in books %}
         <hr>
+        <img style="width: 70px;" src="{{ book.image.url }}" alt="">
         დასახელება: {{ book.name }}
         გვერდების რაოდენობა: {{ book.page_count }}
         კატეგორია: {{ book.category }}

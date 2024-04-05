@@ -7,21 +7,21 @@
 </head>
 <body>
 <a href="{% url 'index' %}"> <h3>მთავარი</h3></a>
-<h1>ყველა რუბრიკა</h1>
-    {% for category in categoryes %}
-        <br>
-        <a href="{% url 'by_category' category.pk %}"><h3>{{ category.name }}</h3></a>
-
+<h3>ყველა კატეგორია</h3>
+    {% for categoryItem in category %}
+        <a href="{% url 'by_category' categoryItem.pk %}"><h5>{{ categoryItem.name }}</h5></a>
     {% endfor %}
     <br>
-<h3>ყველა რუბრიკა</h3>
+<h3>{{ category_name }}  წიგნები </h3>
     {% for book in books %}
         <hr>
-        {{ book.id }}
-        {{ book.title }}
-        {{ book.content }}
-        {{ book.price }}
-        {{ book.published | date:"d.m.Y" }}
+        <img style="width: 70px;" src="{{ book.image.url }}" alt="">
+        დასახელება: {{ book.name }}
+        გვერდების რაოდენობა: {{ book.page_count }}
+        კატეგორია: {{ book.category }}
+        ავტორი: {{ book.author_name }}
+        ფასი: {{ book.price }}
+        დამატებულია: {{ book.published | date:"d.m.Y" }}
     {% endfor %}
 </body>
 </html>
