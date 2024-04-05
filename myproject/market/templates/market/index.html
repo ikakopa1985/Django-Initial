@@ -20,7 +20,7 @@
         დასახელება: {{ book.name }}
         გვერდების რაოდენობა: {{ book.page_count }}
         კატეგორია: {{ book.category }}
-        ავტორი: {{ book.author_name }}
+        ავტორი: {{ book.author.name }}
         ფასი: {{ book.price }}
         დამატებულია: {{ book.published | date:"d.m.Y" }}
     {% endfor %}
