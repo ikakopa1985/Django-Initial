@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<a href="{% url 'index' %}"> <h3>მთავარი</h3></a>
+<h1>ყველა რუბრიკა</h1>
+    {% for category in categoryes %}
+        <br>
+        <a href="{% url 'by_category' category.pk %}"><h3>{{ category.name }}</h3></a>
+
+    {% endfor %}
+    <br>
+<h3>ყველა რუბრიკა</h3>
+    {% for book in books %}
+        <hr>
+        {{ book.id }}
+        {{ book.title }}
+        {{ book.content }}
+        {{ book.price }}
+        {{ book.published | date:"d.m.Y" }}
+    {% endfor %}
+</body>
+</html>

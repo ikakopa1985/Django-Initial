@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<a href="{% url 'index' %}"> <h3>მთავარი</h3></a>
+<h3>ყველა კატეგორია</h3>
+    {% for categoryItem in category %}
+        <a href="{% url 'by_category' categoryItem.pk %}"><h5>{{ categoryItem.name }}</h5></a>
+
+    {% endfor %}
+    <br>
+<h3>ყველა წიგნი</h3>
+    {% for book in books %}
+        <hr>
+        დასახელება: {{ book.name }}
+        გვერდების რაოდენობა: {{ book.page_count }}
+        კატეგორია: {{ book.category }}
+        ავტორი: {{ book.author_name }}
+        ფასი: {{ book.price }}
+        დამატებულია: {{ book.published | date:"d.m.Y" }}
+    {% endfor %}
+</body>
+</html>
