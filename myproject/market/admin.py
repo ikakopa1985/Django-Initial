@@ -9,6 +9,7 @@ class BookAdmin(admin.ModelAdmin):
     search_fields = ('name',)
     list_filter = ('author',) 
 
-admin.site.register(Book,BookAdmin)
+
+admin.site.register(Book, BookAdmin)
 admin.site.register(Category)
 admin.site.register(Author)

@@ -1,18 +1,20 @@
 from django.shortcuts import render
-from django.http import HttpResponse
 from .models import *
 
 # Create your views here.
+
+
 def index(request):
     books = Book.objects.all()
     category = Category.objects.all()
     author = Author.objects.all()
     context = {
         'books': books,
-        'category':category,
-        'author':author
+        'category': category,
+        'author': author
     }
     return render(request, 'market/index.html', context)
+
 
 def by_category(request, category_id):
     print("by_category")
@@ -22,11 +24,12 @@ def by_category(request, category_id):
     category_name = Category.objects.get(id=category_id)
     context = {
         'books': books,
-        'category':category,
-        'filter_name':category_name,
-        'author':author
+        'category': category,
+        'filter_name': category_name,
+        'author': author
     }
     return render(request, 'market/index.html', context)
+
 
 def by_author(request, author_id):
     print("by_author")
@@ -36,11 +39,12 @@ def by_author(request, author_id):
     author_name = Author.objects.get(id=author_id)
     context = {
         'books': books,
-        'category':category,
-        'author':author,
-        'filter_name':author_name
+        'category': category,
+        'author': author,
+        'filter_name': author_name
     }
     return render(request, 'market/index.html', context)
+
 
 def product(request, product_id):
     book = Book.objects.get(id=product_id)
@@ -48,7 +52,7 @@ def product(request, product_id):
     author = Author.objects.all()
     context = {
         'book': book,
-        'category':category,
-        'author':author,
+        'category': category,
+        'author': author,
     }
     return render(request, 'market/product.html', context)
