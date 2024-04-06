@@ -1,0 +1,39 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="navDiv">
+        <a href="{% url 'index' %}">
+            <h3>მთავარი</h3>
+        </a>
+    </div>
+    <div class="bodyDiv">
+        <div class="leftDiv">
+            <h3>ფილტრი კატეგორია</h3>
+                {% for categoryItem in category %}
+                <a href="{% url 'by_category' categoryItem.pk %}">
+                    <h5>{{ categoryItem.name }}</h5>
+                </a>
+                {% endfor %}
+            <h3>ფილტრი ავტორი</h3>
+                {% for authorItem in author %}
+                <a href="{% url 'by_author' authorItem.pk %}">
+                    <h5>{{ authorItem.name }}</h5>
+                </a>
+
+                {% endfor %}
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+
+</body>
+
+</html>

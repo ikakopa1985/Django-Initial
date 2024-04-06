@@ -19,6 +19,8 @@ from django.urls import path
 from market.views import *
 
 urlpatterns = [
-    path('<int:category_id>/', by_category, name='by_category'),
+    path('by_category/<int:category_id>/', by_category, name='by_category'),
+    path('by_author/<int:author_id>/', by_author, name='by_author'),
+    path('product/<int:product_id>/', product, name='product'),
     path('', index, name='index')
 ]

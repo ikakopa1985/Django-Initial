@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="centralDiv">
+    <div class="product">
+        <img style="width: 500px;" src="{{ book.image.url }}" alt="none">
+        <div class="productDiscription">
+            <p>დასახელება: {{ book.name }}</p>
+            <p>გვერდების რაოდენობა: {{ book.page_count }}</p>
+            <p>კატეგორია: {{ book.category }}</p>
+            <p>ავტორი: {{ book.author.name }}</p>
+            <p>ფასი: {{ book.price }}</p>
+            <p>დამატებულია: {{ book.published | date:"d.m.Y" }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

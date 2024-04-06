@@ -1,0 +1,53 @@
+.navDiv {
+    height: 90;
+    border: 1px solid black;
+    padding: 5px;
+
+}
+
+.bodyDiv {
+    display: flex;
+    flex-direction: row;
+
+}
+
+.leftDiv {
+    width: 20%;
+    border-right: 1px solid black;
+}
+
+.centralDiv {
+    padding: 5px;
+    width: 100%;
+}
+
+.product {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.productDiscription{
+    display: flex;
+    flex-direction: column;
+    margin-left: 100px;
+}
+
+.bookItems {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    padding: 3px;
+    justify-content: space-between;
+    align-items: center;
+    height: 260px;
+    width: 160px;
+    margin: 10px;
+}
+
+.bookItemsAll{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;  
+    padding: 10px;
+}
