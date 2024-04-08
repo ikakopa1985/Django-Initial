@@ -3,7 +3,7 @@ from .models import *
 from django.http import JsonResponse
 from django.http import HttpResponseNotFound
 from django.core.serializers import serialize
-from rest_framework import serializers
+from .serializers import *
 # Create your views here.
 
 
@@ -50,9 +50,14 @@ def by_author(request, author_id):
 
 
 def product(request, product_id):
-    book = Book.objects.get(id=product_id)
+    book = ''
+    try:
+        book = Book.objects.get(id=product_id)
+    except:
+        return HttpResponseNotFound("Page not found")
     category = Category.objects.all()
     author = Author.objects.all()
+
     context = {
         'book': book,
         'category': category,
@@ -76,27 +81,6 @@ def json_request(request):
         array_response_data.append(response_data)
     print(array_response_data)
     return JsonResponse(array_response_data, safe=False)
-
-
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ['name']
-
-
-class AuthorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Author
-        fields = ['name']
-
-
-class MyModelSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
-    author = AuthorSerializer()
-
-    class Meta:
-        model = Book
-        fields = ['name', 'page_count', 'category', 'author', 'price', 'image', 'published']
 
 
 def json_request_with_serialization_framework(request):

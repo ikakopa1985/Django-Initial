@@ -27,5 +27,5 @@ urlpatterns = [
     path('json_request_with_serialization_framework/', json_request_with_serialization_framework,
          name='json_request_with_serialization_framework'),
     path('', index, name='index'),
-    path('<path:route>/', default_route, name='default_route'),
+    # path('<path:route>/', default_route, name='default_route'),
 ]
