@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from .models import *
-
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -56,3 +56,20 @@ def product(request, product_id):
         'author': author,
     }
     return render(request, 'market/product.html', context)
+
+
+def json_request(request):
+    array_response_data = []
+    response_data = {}
+    book = Book.objects.all()
+    for item in book:
+        response_data['name'] = item.name
+        response_data['page_count'] = item.page_count
+        response_data['category'] = item.category.name
+        response_data['author'] = item.author.name
+        response_data['price'] = item.price
+        response_data['image'] = item.image.url
+        response_data['published'] = item.published
+        array_response_data.append(response_data)
+    print(array_response_data)
+    return JsonResponse(array_response_data, safe=False)
