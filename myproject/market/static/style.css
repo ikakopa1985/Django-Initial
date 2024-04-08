@@ -2,7 +2,10 @@
     height: 90px;
     border: 1px solid black;
     padding: 5px;
-
+    display: flex;
+    flex-direction: row;
+    widows: 100%;
+    justify-content: space-between;
 }
 
 .bodyDiv {

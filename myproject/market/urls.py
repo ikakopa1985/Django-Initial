@@ -22,5 +22,10 @@ urlpatterns = [
     path('by_author/<int:author_id>/', by_author, name='by_author'),
     path('product/<int:product_id>/', product, name='product'),
     path('json_request/', json_request, name='json_request'),
-    path('', index, name='index')
+    path('json_request_with_serialization/', json_request_with_serialization, name='json_request_with_serialization'),
+    path('json_request_with_values_list/', json_request_with_values_list, name='json_request_with_values_list'),
+    path('json_request_with_serialization_framework/', json_request_with_serialization_framework,
+         name='json_request_with_serialization_framework'),
+    path('', index, name='index'),
+    path('<path:route>/', default_route, name='default_route'),
 ]

@@ -1,6 +1,9 @@
 from django.shortcuts import render
 from .models import *
 from django.http import JsonResponse
+from django.http import HttpResponseNotFound
+from django.core.serializers import serialize
+from rest_framework import serializers
 # Create your views here.
 
 
@@ -73,3 +76,63 @@ def json_request(request):
         array_response_data.append(response_data)
     print(array_response_data)
     return JsonResponse(array_response_data, safe=False)
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['name']
+
+
+class AuthorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Author
+        fields = ['name']
+
+
+class MyModelSerializer(serializers.ModelSerializer):
+    category = CategorySerializer()
+    author = AuthorSerializer()
+
+    class Meta:
+        model = Book
+        fields = ['name', 'page_count', 'category', 'author', 'price', 'image', 'published']
+
+
+def json_request_with_serialization_framework(request):
+    queryset = Book.objects.all()
+    serializer = MyModelSerializer(queryset, many=True)
+    print(serializer.data)
+    return JsonResponse(serializer.data, safe=False)
+
+
+def json_request_with_serialization(request):
+    books = Book.objects.all()
+    serialized_data = serialize('json', books, fields=('name', 'page_count', 'category', 'author',
+                                                       'price', 'image', 'published'), use_natural_foreign_keys=True,
+                                use_natural_primary_keys=True)
+    return JsonResponse(serialized_data, safe=False)
+
+
+def json_request_with_values_list(request):
+    books = Book.objects.all().values_list(
+        'name', 'page_count', 'category__name', 'author__name', 'price', 'image', 'published'
+    )
+    array_response_data = []
+    for book_data in books:
+        response_data = {
+            'name': book_data[0],
+            'page_count': book_data[1],
+            'category': book_data[2],
+            'author': book_data[3],
+            'price': book_data[4],
+            'image': book_data[5],
+            'published': book_data[6]
+        }
+        array_response_data.append(response_data)
+
+    return JsonResponse(array_response_data, safe=False)
+
+
+def default_route(request, route):
+    return HttpResponseNotFound("Page not found")
