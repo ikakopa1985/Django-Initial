@@ -1,3 +1,5 @@
 venv/
 /.idea
 comm.txt
+myproject\market\__pycache__/
+myproject\myproject\__pycache__
