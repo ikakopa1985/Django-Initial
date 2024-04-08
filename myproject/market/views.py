@@ -4,6 +4,7 @@ from django.http import JsonResponse
 from django.http import HttpResponseNotFound
 from django.core.serializers import serialize
 from .serializers import *
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
@@ -50,11 +51,7 @@ def by_author(request, author_id):
 
 
 def product(request, product_id):
-    book = ''
-    try:
-        book = Book.objects.get(id=product_id)
-    except:
-        return HttpResponseNotFound("Page not found")
+    book = get_object_or_404(Book, pk=product_id)
     category = Category.objects.all()
     author = Author.objects.all()
 
