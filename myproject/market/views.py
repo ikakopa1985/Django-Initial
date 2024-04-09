@@ -1,5 +1,4 @@
 from django.shortcuts import render
-from .models import *
 from django.http import JsonResponse
 from django.http import HttpResponseNotFound
 from django.core.serializers import serialize

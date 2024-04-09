@@ -4,7 +4,6 @@
     padding: 5px;
     display: flex;
     flex-direction: row;
-    widows: 100%;
     justify-content: space-between;
 }
 
@@ -30,7 +29,7 @@
     justify-content: flex-start;
 }
 
-.productDiscription{
+.productDescription{
     display: flex;
     flex-direction: column;
     margin-left: 100px;
