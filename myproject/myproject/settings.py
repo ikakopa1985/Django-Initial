@@ -119,6 +119,14 @@ USE_TZ = True
 
 STATIC_URL = "static/"
 
+USE_I18N = True
+
+LANGUAGES = [
+    ('en', 'English'),
+    ('ka', 'Georgian'),
+    # Add more languages as needed
+]
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
