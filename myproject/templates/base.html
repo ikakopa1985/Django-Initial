@@ -42,6 +42,16 @@
                 </a>
 
                 {% endfor %}
+             <h3>დამატება</h3>
+                    <a href="{% url 'add_author' %}">
+                        <h5>ავტორის დამატება</h5>
+                    </a>
+                    <a href="{% url 'add_book' %}">
+                        <h5>წიგნის დამატება</h5>
+                    </a>
+                    <a href="{% url 'add_category' %}">
+                        <h5>კატეგორიის დამატება</h5>
+                    </a>
         </div>
         {% block content %}{% endblock %}
     </div>

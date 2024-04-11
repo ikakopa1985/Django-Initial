@@ -4,6 +4,11 @@ from django.http import HttpResponseNotFound
 from django.core.serializers import serialize
 from .serializers import *
 from django.shortcuts import get_object_or_404
+from django.views.generic.edit import CreateView
+from django.urls import reverse_lazy
+from .forms import *
+
+
 # Create your views here.
 
 
@@ -78,7 +83,7 @@ def json_request(request):
         response_data['published'] = item.published
         array_response_data.append(response_data)
     print(array_response_data)
-    return JsonResponse(array_response_data, safe=False)
+    return JsonResponse(array_response_data, safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 def json_request_with_serialization_framework(request):
@@ -99,9 +104,45 @@ def json_request_with_serialization(request):
 def json_request_with_values_list(request):
     books = list(
         Book.objects.all().values_list(
-        'name', 'page_count', 'category__name', 'author__name', 'price', 'image', 'published', named=True))
+            'name', 'page_count', 'category__name', 'author__name', 'price', 'image', 'published', named=True))
     return JsonResponse(books, safe=False, json_dumps_params={'ensure_ascii': False})
 
 
 def default_route(request, route):
     return HttpResponseNotFound("Page not found")
+
+
+class AuthorCrateView(CreateView):
+    template_name = 'market/create.html'
+    form_class = AuthorForm
+    success_url = reverse_lazy('index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['author'] = Author.objects.all()
+        context['category'] = Category.objects.all()
+        return context
+
+
+class CategoryCrateView(CreateView):
+    template_name = 'market/create.html'
+    form_class = CategoryForm
+    success_url = reverse_lazy('index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['author'] = Author.objects.all()
+        context['category'] = Category.objects.all()
+        return context
+
+
+class BookCrateView(CreateView):
+    template_name = 'market/create.html'
+    form_class = BookForm
+    success_url = reverse_lazy('index')
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['author'] = Author.objects.all()
+        context['category'] = Category.objects.all()
+        return context

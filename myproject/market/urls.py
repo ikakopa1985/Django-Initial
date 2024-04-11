@@ -15,7 +15,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.urls import path
-from market.views import *
+from .views import *
 
 urlpatterns = [
     path('by_category/<int:category_id>/', by_category, name='by_category'),
@@ -27,5 +27,9 @@ urlpatterns = [
     path('json_request_with_serialization_framework/', json_request_with_serialization_framework,
          name='json_request_with_serialization_framework'),
     path('', index, name='index'),
+    path('add_author/', AuthorCrateView.as_view(), name='add_author'),
+    path('add_book/', BookCrateView.as_view(), name='add_book'),
+    path('add_category/', CategoryCrateView.as_view(), name='add_category'),
+
     # path('<path:route>/', default_route, name='default_route'),
 ]
