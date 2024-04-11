@@ -1,16 +1,17 @@
 {% extends "base.html" %}
 
-{% block content %}
 <div class="centralDiv">
-    <h3>{{ filter_name }}</h3>
-    <div class="bookItemsAll">
-        {% for book in books %}
-        <a class="bookItems" href="{% url 'product' book.pk %}">
-            <img style="width: 70px;" src="{{ book.image.url }}" alt="">
-            <p>{{ book.name }}</p>
-            <p> ავტორი: {{ book.author.name }}</p>
-        </a>
-        {% endfor %}
-    </div>
-</div>
+{% block content %}
+    {% for book in books %}
+        <a class="product" href="{% url 'product' book.pk %}">
+      <img src="{{ book.image.url }}" alt="Product 1">
+      <div class="product-details">
+        <h2 class="product-name">{{ book.name }}</h2>
+        <p class="product-description">{{ book.author.name }}</p>
+        <span class="product-price">{{ book.price }}</span>
+      </div>
+      <button class="add-to-cart">Add to Cart</button>
+    </a>
+    {% endfor %}
 {% endblock %}
+</div>
