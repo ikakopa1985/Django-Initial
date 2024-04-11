@@ -1,7 +1,9 @@
 {% extends "base.html" %}
 
-<div class="centralDiv">
+
+
 {% block content %}
+    <div class="centralDiv">
     {% for book in books %}
         <a class="product" href="{% url 'product' book.pk %}">
       <img src="{{ book.image.url }}" alt="Product 1">
@@ -13,5 +15,6 @@
       <button class="add-to-cart">Add to Cart</button>
     </a>
     {% endfor %}
+    </div>
 {% endblock %}
 </div>
