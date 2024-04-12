@@ -4,7 +4,7 @@ from .models import *
 
 
 class BookAdmin(admin.ModelAdmin):
-    list_display = ('name', 'page_count', 'category', 'author', 'published')
+    list_display = ('name', 'page_count', 'category', 'published')
     list_display_links = ('name',)
     search_fields = ('name',)
     list_filter = ('author',) 

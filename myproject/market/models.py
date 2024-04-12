@@ -4,8 +4,8 @@ from django.db import models
 
 
 class Book(models.Model):
-    category = models.ForeignKey('Category', null=True, on_delete=models.PROTECT, verbose_name="  კატეგორია")
-    author = models.ForeignKey('Author', null=True, on_delete=models.PROTECT, verbose_name="  ავტორი")
+    category = models.ForeignKey('Category', null=True, on_delete=models.PROTECT, verbose_name="  კატეგორია", related_name='FKcategpry')
+    author = models.ManyToManyField('Author', verbose_name=' კატეგორია',  related_name='FKAuthor')
     name = models.CharField(max_length=255, verbose_name=' წიგნის დასახელება')
     page_count = models.IntegerField(verbose_name=' ფურცლების რაოდენობა')
     price = models.FloatField(null=True, blank=True, verbose_name=" ფასი")
@@ -46,3 +46,4 @@ class Author(models.Model):
     class Meta:
         verbose_name_plural = " ავტორები"
         verbose_name = " ავტორი"
+

@@ -30,6 +30,8 @@ urlpatterns = [
     path('add_author/', AuthorCrateView.as_view(), name='add_author'),
     path('add_book/', BookCrateView.as_view(), name='add_book'),
     path('add_category/', CategoryCrateView.as_view(), name='add_category'),
+    path('test/', test, name='test'),
+
 
     # path('<path:route>/', default_route, name='default_route'),
 ]

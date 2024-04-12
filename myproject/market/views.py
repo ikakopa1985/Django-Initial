@@ -25,7 +25,7 @@ def index(request):
 
 
 def by_category(request, category_id):
-    print("by_category")
+    filtered_category = Category.objects.get(pk=category_id)
     books = Book.objects.filter(category_id=category_id)
     category = Category.objects.all()
     author = Author.objects.all()
@@ -33,6 +33,7 @@ def by_category(request, category_id):
     category_name = get_object_or_404(Category, pk=category_id)
     context = {
         'books': books,
+        'filtered_category': filtered_category,
         'category': category,
         'filter_name': category_name,
         'author': author
@@ -41,13 +42,14 @@ def by_category(request, category_id):
 
 
 def by_author(request, author_id):
-    print("by_author")
-    books = Book.objects.filter(author_id=author_id)
+    filtered_author = Author.objects.get(pk=author_id)
+    books = Book.objects.filter(author=filtered_author)
     category = Category.objects.all()
     author = Author.objects.all()
     # author_name = Author.objects.get(id=author_id)
     author_name = get_object_or_404(Author, pk=author_id)
     context = {
+        'filtered_author': filtered_author,
         'books': books,
         'category': category,
         'author': author,
@@ -146,3 +148,19 @@ class BookCrateView(CreateView):
         context['author'] = Author.objects.all()
         context['category'] = Category.objects.all()
         return context
+
+
+def test(request):
+    category = Category.objects.first()
+    print(category.name)
+    # როცა related_name='FKcategpry' არაა მითითებული:
+    # for item in category.book_set.all():
+    #     print( item.name)
+    # თუ კია მაშინ:
+    for item in category.FKcategpry.all():
+        print(item.name)
+    test = category
+    context = {
+        'test': test
+    }
+    return render(request, 'market/index.html', context)

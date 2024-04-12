@@ -33,7 +33,7 @@
             <h3>ფილტრი ავტორი</h3>
         <div class="filterDivs">
                 {% for authorItem in author %}
-                <a class="filterItem" href="{% url 'by_author' authorItem.pk %}">
+                <a class="filterItem" href="{% url 'by_author' authorItem.id %}">
                     {{ authorItem.name }}
                 </a>
 
@@ -51,6 +51,9 @@
                     </a>
                     <a class="filterItem" href="{% url 'add_category' %}">
                         კატეგორიის დამატება
+                    </a>
+                    <a class="filterItem" href="{% url 'test' %}">
+                        test button
                     </a>
 
           </div>

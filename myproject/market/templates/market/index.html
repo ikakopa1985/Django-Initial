@@ -3,18 +3,28 @@
 
 
 {% block content %}
+    <div class="contentDiv">
+    {% if filtered_author  %}
+        <p class="filtered_name">ფილტრი: {{ filtered_author.name }}</p>
+    {% endif %}
+
+    {% if filtered_category  %}
+    <p class="filtered_name">ფილტრი: {{ filtered_category.name }}</p>
+    {% endif %}
+     <p class="Total_Books">წიგნების რაოდენობა: {{ books.count }}</p>
+
     <div class="centralDiv">
     {% for book in books %}
         <a class="product" href="{% url 'product' book.pk %}">
       <img src="{{ book.image.url }}" alt="Product 1">
       <div class="product-details">
         <h2 class="product-name">{{ book.name }}</h2>
-        <p class="product-description">{{ book.author.name }}</p>
-        <span class="product-price">{{ book.price }}</span>
+        <span class="product-price">{{ book.price }} ლარი</span>
       </div>
-      <button class="add-to-cart">Add to Cart</button>
+      <button class="add-to-cart">კალათაში დამატება</button>
     </a>
     {% endfor %}
     </div>
+    </div>
 {% endblock %}
-</div>
+
