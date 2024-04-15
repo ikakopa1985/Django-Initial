@@ -16,6 +16,8 @@ Including another URLconf
 """
 from django.urls import path
 from .views import *
+from django.views.generic.base import RedirectView
+from django.conf.urls import url
 
 urlpatterns = [
     path('by_category/<int:category_id>/', by_category, name='by_category'),
@@ -31,6 +33,10 @@ urlpatterns = [
     path('add_book/', BookCrateView.as_view(), name='add_book'),
     path('add_category/', CategoryCrateView.as_view(), name='add_category'),
     path('test/', test, name='test'),
+    # Other URL patterns
+    path('i18n/', RedirectView.as_view(url='/')),
+    url(r'^set_language/$', 'django.views.i18n.set_language', name='set_language'),
+
 
 
     # path('<path:route>/', default_route, name='default_route'),

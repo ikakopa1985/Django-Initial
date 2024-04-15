@@ -15,6 +15,17 @@
     <a href="{% url 'json_request_with_serialization' %}" class="nav-button">json_request_with_serialization</a>
     <a href="{% url 'json_request_with_values_list' %}" class="nav-button">json_request_with_values_list</a>
     <a href="{% url 'json_request_with_serialization_framework' %}" class="nav-button">json_request_with_serialization_framework</a>
+  <form action="{% url 'set_language' %}" method="post" id="language-form">
+    {% csrf_token %}
+    <input name="next" type="hidden" value="{{ request.get_full_path }}">
+    <select name="language" id="language-select" onchange="this.form.submit()">
+        {% for lang_code, lang_name in LANGUAGES %}
+            <option value="{{ lang_code }}" {% if lang_code == LANGUAGE_CODE %} selected {% endif %}>
+                {{ lang_name }}
+            </option>
+        {% endfor %}
+    </select>
+</form>
   </nav>
 </header>
 <body>
