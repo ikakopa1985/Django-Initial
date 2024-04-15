@@ -1,27 +1,29 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 # Create your models here.
 
 
 class Book(models.Model):
-    category = models.ForeignKey('Category', null=True, on_delete=models.PROTECT, verbose_name="  კატეგორია", related_name='FKcategpry')
-    author = models.ManyToManyField('Author', verbose_name=' კატეგორია',  related_name='FKAuthor')
-    name = models.CharField(max_length=255, verbose_name=' წიგნის დასახელება')
-    page_count = models.IntegerField(verbose_name=' ფურცლების რაოდენობა')
-    price = models.FloatField(null=True, blank=True, verbose_name=" ფასი")
+    category = models.ForeignKey('Category', null=True, on_delete=models.PROTECT, verbose_name=_('Category'),
+                                 related_name='FKcategpry')
+    author = models.ManyToManyField('Author', verbose_name=_('Author'),  related_name='FKAuthor')
+    name = models.CharField(max_length=255, verbose_name=_('Book Name'))
+    page_count = models.IntegerField(verbose_name=_('List Count'))
+    price = models.FloatField(null=True, blank=True, verbose_name=_("Price"))
     image = models.ImageField(upload_to='mediafiles/', null=True)
-    published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name=" შექმნის თარიღი")
+    published = models.DateTimeField(auto_now_add=True, db_index=True, verbose_name="")
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name_plural = " წიგნები"
-        verbose_name = " წიგნი"
+        verbose_name_plural = _("books")
+        verbose_name = _("book")
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, db_index=True, verbose_name="  კატეგორია")
+    name = models.CharField(max_length=50, db_index=True, verbose_name=_('Category'))
 
     def __str__(self):
         return self.name
@@ -30,12 +32,12 @@ class Category(models.Model):
         return self.name,
 
     class Meta:
-        verbose_name_plural = " კატეგორიები"
-        verbose_name = " კატეგორია"
+        verbose_name_plural = _('Categoryes')
+        verbose_name = _('Category')
     
 
 class Author(models.Model):
-    name = models.CharField(max_length=50, db_index=True, verbose_name="  ავტორი")
+    name = models.CharField(max_length=50, db_index=True, verbose_name=_('Author'))
 
     def __str__(self):
         return self.name
@@ -44,6 +46,5 @@ class Author(models.Model):
         return self.name,
 
     class Meta:
-        verbose_name_plural = " ავტორები"
-        verbose_name = " ავტორი"
-
+        verbose_name_plural = _('Authors')
+        verbose_name = _('Author')
