@@ -1,25 +1,19 @@
 from .models import *
 from rest_framework import serializers
+from rest_framework.serializers import Serializer, ModelSerializer
 
 
-class CategorySerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Category
-        fields = ['name']
 
-
-class AuthorSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Author
-        fields = ['name']
-
-
-class MyModelSerializer(serializers.ModelSerializer):
-    category = CategorySerializer()
-    author = AuthorSerializer()
-
+class ProducSerializer(ModelSerializer):
     class Meta:
         model = Book
-        fields = ['name', 'page_count', 'category', 'author', 'price', 'image', 'published']
+        fields = ['id','name', 'price']
+
+
+class ProducDetailedSerializer(ModelSerializer):
+    class Meta:
+        model = Book
+        fields = ['name', 'price', 'page_count', 'category', 'author']
+
 
 

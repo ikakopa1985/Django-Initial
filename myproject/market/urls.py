@@ -17,21 +17,10 @@ Including another URLconf
 from django.urls import path
 from .views import *
 
+
 urlpatterns = [
-    path('by_category/<int:category_id>/', by_category, name='by_category'),
-    path('by_author/<int:author_id>/', by_author, name='by_author'),
-    path('product/<int:product_id>/', product, name='product'),
-    path('json_request/', json_request, name='json_request'),
-    path('json_request_with_serialization/', json_request_with_serialization, name='json_request_with_serialization'),
-    path('json_request_with_values_list/', json_request_with_values_list, name='json_request_with_values_list'),
-    path('json_request_with_serialization_framework/', json_request_with_serialization_framework,
-         name='json_request_with_serialization_framework'),
-    path('', index, name='index'),
-    path('add_author/', AuthorCrateView.as_view(), name='add_author'),
-    path('add_book/', BookCrateView.as_view(), name='add_book'),
-    path('add_category/', CategoryCrateView.as_view(), name='add_category'),
-    path('test/', test, name='test'),
-
-
-    # path('<path:route>/', default_route, name='default_route'),
+    path('', ProductListView.as_view() , name='get_products'),
+    path('product/<int:product_id>/', ProductDetailView.as_view(), name='get_product'),
+    # path('product/<int:product_id>/', ProductDetailView.as_view(), name='get_product'),
+    path('delete/<int:product_id>/', delete, name='delete_product'),
 ]

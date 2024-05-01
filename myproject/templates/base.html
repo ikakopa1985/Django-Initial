@@ -10,7 +10,7 @@
 </head>
 <header>
   <nav class="navbar">
-    <a href="{% url 'index' %}" class="nav-button">მთავარი</a>
+{#    <a href="{% url 'index' %}" class="nav-button">მთავარი</a>#}
     <a href="{% url 'json_request' %}" class="nav-button">json request</a>
     <a href="{% url 'json_request_with_serialization' %}" class="nav-button">json_request_with_serialization</a>
     <a href="{% url 'json_request_with_values_list' %}" class="nav-button">json_request_with_values_list</a>
@@ -20,8 +20,13 @@
 <body>
     <div class="bodyDiv">
         <div class="leftDiv">
-            <h3>ფილტრი კატეგორია</h3>
 
+
+        <div class="filterDivs">
+            <h3>list view</h3>
+                <a href="{% url 'listview' %}" class="filterItem">list view</a>
+            <h3>ფილტრი კატეგორია</h3>
+        </div>
         <div class="filterDivs">
                 {% for categoryItem in category %}
                 <a class="filterItem"  href="{% url 'by_category' categoryItem.pk %}">
