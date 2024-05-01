@@ -13,7 +13,7 @@ class ProducSerializer(ModelSerializer):
 class ProducDetailedSerializer(ModelSerializer):
     class Meta:
         model = Book
-        fields = ['name', 'price', 'page_count', 'category', 'author']
+        fields = ['name', 'price', 'page_count', 'category', 'author', 'stock']
 
 
 

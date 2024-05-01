@@ -21,6 +21,6 @@ from .views import *
 urlpatterns = [
     path('', ProductListView.as_view() , name='get_products'),
     path('product/<int:product_id>/', ProductDetailView.as_view(), name='get_product'),
-    # path('product/<int:product_id>/', ProductDetailView.as_view(), name='get_product'),
+    path('update/<int:product_id>/<int:stock>', update, name='update_product'),
     path('delete/<int:product_id>/', delete, name='delete_product'),
 ]

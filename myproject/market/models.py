@@ -9,6 +9,7 @@ class Book(models.Model):
                                  related_name='FKcategpry')
     author = models.ManyToManyField('Author', verbose_name=_('Author'),  related_name='FKAuthor')
     name = models.CharField(max_length=255, verbose_name=_('Book Name'))
+    stock = models.IntegerField(verbose_name=_('stock'), null=True, blank=True,)
     page_count = models.IntegerField(verbose_name=_('List Count'))
     price = models.FloatField(null=True, blank=True, verbose_name=_("Price"))
     image = models.ImageField(upload_to='mediafiles/', null=True)
