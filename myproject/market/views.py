@@ -1,9 +1,8 @@
 from .serializers import *
-from django.shortcuts import get_object_or_404
 from .forms import *
-from rest_framework.decorators import api_view
+from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.generics import RetrieveAPIView, ListAPIView
+from rest_framework.generics import RetrieveAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
 
 
 class ProductDetailView(RetrieveAPIView):
@@ -14,19 +13,25 @@ class ProductDetailView(RetrieveAPIView):
 
 class ProductListView(ListAPIView):
     queryset = Book.objects.all()
+    lookup_field = 'pk'
     serializer_class = ProducSerializer
 
 
-@api_view()
-def delete(request, product_id):
-    book = get_object_or_404(Book, id=product_id)
-    book.delete()
-    return Response({'deleted': 'Yes'})
+class UpdateStockAPIView(UpdateAPIView):
+    queryset = Book.objects.all()
+    lookup_url_kwarg = 'product_id'
+    serializer_class = BookUpdateSerializer
+
+    def perform_update(self, serializer):
+        stock = self.request.data.get('stock')
+        serializer.save(stock=stock)
 
 
-@api_view()
-def update(request, product_id, stock):
-    book = get_object_or_404(Book, id=product_id)
-    book.stock = stock
-    book.save()
-    return Response({'updated': 'Yes'})
+class DeleteBookAPIView(DestroyAPIView):
+    queryset = Book.objects.all()
+    lookup_url_kwarg = 'product_id'
+
+    def delete(self, request, *args, **kwargs):
+        instance = self.get_object()
+        self.perform_destroy(instance)
+        return Response(status=status.HTTP_204_NO_CONTENT)

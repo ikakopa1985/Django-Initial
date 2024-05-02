@@ -15,4 +15,11 @@ class ProducDetailedSerializer(ModelSerializer):
         fields = ['name', 'price', 'page_count', 'category', 'author', 'stock']
 
 
+class BookUpdateSerializer(ModelSerializer):
+    class Meta:
+        model = Book
+        fields = ['stock']
+
+
+
 
