@@ -2,7 +2,6 @@ from .models import *
 from rest_framework.serializers import ModelSerializer
 
 
-
 class ProducSerializer(ModelSerializer):
     class Meta:
         model = Book

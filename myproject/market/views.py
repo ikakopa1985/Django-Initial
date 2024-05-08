@@ -22,16 +22,7 @@ class UpdateStockAPIView(UpdateAPIView):
     lookup_url_kwarg = 'product_id'
     serializer_class = BookUpdateSerializer
 
-    def perform_update(self, serializer):
-        stock = self.request.data.get('stock')
-        serializer.save(stock=stock)
-
 
 class DeleteBookAPIView(DestroyAPIView):
     queryset = Book.objects.all()
     lookup_url_kwarg = 'product_id'
-
-    def delete(self, request, *args, **kwargs):
-        instance = self.get_object()
-        self.perform_destroy(instance)
-        return Response(status=status.HTTP_204_NO_CONTENT)
