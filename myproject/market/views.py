@@ -1,7 +1,5 @@
 from .serializers import *
 from .forms import *
-from rest_framework import status
-from rest_framework.response import Response
 from rest_framework.generics import RetrieveAPIView, ListAPIView, UpdateAPIView, DestroyAPIView
 
 
